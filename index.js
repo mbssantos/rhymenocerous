@@ -1,9 +1,9 @@
 const FS = require('fs');
-const HAYSTACK = FS.readFileSync('./words.txt', 'utf-8').toString().split('\n');
+const HAYSTACK = JSON.parse(FS.readFileSync('./words.json', 'utf-8'));
 
-const needle = 'ytä';
-const minLength = 4
-const maxLength = 8;
+const needle = 'oita';
+const minLength = 0;
+const maxLength = 100;
 
 const needleLength = needle.length
 
@@ -15,4 +15,4 @@ const results = HAYSTACK.filter(word => {
     needleIndex >= 0 && needleIndex + needleLength === wordLength;
 }).sort((a, b) => b.length - a.length);
 
-FS.writeFileSync(`${needle}.json`, JSON.stringify(results));
+FS.writeFileSync(`./output/${needle}.json`, JSON.stringify(results));
